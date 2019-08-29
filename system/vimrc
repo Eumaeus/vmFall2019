@@ -1,0 +1,122 @@
+
+
+if has("syntax")
+  syntax on
+endif
+
+filetyp plugin on
+filetype indent on
+
+"set showcmd		" Show (partial) command in status line.
+set showmatch		" Show matching brackets.
+set hlsearch        " highlight search results
+set incsearch		" Incremental search
+set ignorecase		" Do case insensitive matching
+set smartcase		" Do smart case matching
+" set keymap=greek_beta
+" set keymap=
+set history=300
+set backspace=indent,eol,start
+set ruler 			"show position on line 
+set mouse=a			"mouse support
+set showcmd			"show current command on bottom line
+
+
+set nu				"show line numbers
+"set cmdheight=2
+" autocmd FileType md,markdown UniCycleOn
+"inoremap kj <Esc>	
+inoremap kj <Esc>
+
+" Line-break and wrapping stuff
+set wrap linebreak nolist
+"set tw=100
+"set fo-=t
+"set wm=0
+
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set noexpandtab
+set tm=3000
+set mat=3
+set autochdir
+nnoremap Q <nop>
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
+" I get into trouble A LOT by inadvertently lower-casing things
+" Note that '~' will toggle the case of selected chars.
+vnoremap u ""
+vnoremap U ""
+
+" nnoremap ; :
+command W w
+command Q q
+:nmap <C-e> :e#<CR>
+
+set encoding=utf-8 
+set termencoding=utf-8
+set fileencoding=utf-8
+filetype plugin indent on
+
+set laststatus=2
+
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'
+    hi statusline guibg=Cyan ctermfg=6 guifg=Black ctermbg=0
+  elseif a:mode == 'r'
+    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
+  else
+    hi statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
+  endif
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
+
+" default the statusline to green when entering Vim
+hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
+
+" Formats the statusline
+set statusline=%f                           " file name
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%y      "filetype
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+
+set statusline+=\ %=                        " align left
+set statusline+=Line:%l/%L[%p%%]            " line X of Y [percent of file]
+set statusline+=\ Col:%c                    " current column
+set statusline+=\ Buf:%n                    " Buffer number
+set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
+
+"augroup vimrc_autocmds
+"autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#592929
+"autocmd BufEnter * match OverLength /\%120v.*/
+"augroup END
+
+" FoldColumn
+set foldcolumn=5
+highlight FoldColumn guibg=NONE
+highlight FoldColumn ctermbg=NONE
+autocmd Colorscheme * highlight FoldColumn guibg=NONE
+autocmd Colorscheme * highlight FoldColumn ctermbg=NONE
+
+" ------------------------------------------------------------------
+" Solarized Colorscheme Config
+" ------------------------------------------------------------------
+let g:solarized_contrast="high"    "default value is normal
+let g:solarized_visibility="high"    "default value is normal
+let g:solarized_diffmode="high"    "default value is normal
+syntax enable
+set background=dark
+"colorscheme solarized
+" ------------------------------------------------------------------
