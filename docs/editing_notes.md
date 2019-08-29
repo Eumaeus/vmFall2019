@@ -136,6 +136,7 @@ val customLexicon:Vector[String] = loadWordList("data/mywords.txt")
 /* This version assumes the input Corpus is tokenized… one word per citable node. */
 /* Obviously a full-fledged program should check for this somehow. */
 /* This is case-sensitive! */
+
 def spellCheck(corp:Corpus, lex:Vector[String]):Corpus = {
 	val badWordCorpus:Corpus = {
 		val badWordVec:Vector[CitableNode] = corp.nodes.filter( n => {
